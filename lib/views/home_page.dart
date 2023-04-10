@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:number_shapes/entities/my_number.dart';
+import '../entities/my_number.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
   final String title;
 
   @override
@@ -11,8 +11,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _txtController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _txtController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -26,10 +26,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String _getNumberShape() {
-    final number = double.tryParse(_txtController.text);
-    if (number == null) return 'Invalid input';
+    final double? number = double.tryParse(_txtController.text);
+    if (number == null) {
+      return 'Invalid input';
+    }
 
-    final myNumber = MyNumber(number);
+    final MyNumber myNumber = MyNumber(number);
     final String stringNumber = myNumber.toString();
 
     if (myNumber.isPerfectSquare() && myNumber.isPerfectCube()) {
@@ -44,13 +46,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 // Validate the input value
-  String? validate(value) {
-    if (value == null || value.isEmpty) {
+  String? validate(String value) {
+    if (value.isEmpty) {
       return 'Please enter a number';
     }
 
     // Regex pattern to allow digits, decimal point
-    final numberPattern = RegExp(r'^\d*\.?\d{0,15}');
+    final RegExp numberPattern = RegExp(r'^\d*\.?\d{0,15}');
     if (!numberPattern.hasMatch(value)) {
       return 'Please enter a valid number';
     }
@@ -59,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void showAlertBox() {
-    var myNumber = MyNumber(double.parse(_txtController.text));
+    final MyNumber myNumber = MyNumber(double.parse(_txtController.text));
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -67,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(myNumber.toString()),
           // Trims all unnecessary zeros from end
           content: Text(_getNumberShape()),
-          actions: [
+          actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
@@ -85,17 +87,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(title: Text(widget.title)),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Form(
                 key: _formKey,
                 child: TextFormField(
                     controller: _txtController,
                     decoration:
-                        const InputDecoration(labelText: "Enter your number"),
+                        const InputDecoration(labelText: 'Enter your number'),
                     keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true, signed: false),
-                    inputFormatters: [
+                        decimal: true),
+                    inputFormatters: <TextInputFormatter>[
                       //  Allow digits, decimal point
                       FilteringTextInputFormatter.allow(
                           RegExp(r'^\d*\.?\d{0,15}'))
@@ -104,9 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-                _txtController.text != '' ? showAlertBox() : null;
-          },
+          onPressed: _txtController.text.isNotEmpty ? showAlertBox : null,
           backgroundColor: Colors.pinkAccent,
           child: const Icon(Icons.check)
         ));
