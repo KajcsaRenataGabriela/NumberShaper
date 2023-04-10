@@ -91,14 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 key: _formKey,
                 child: TextFormField(
                     controller: _txtController,
-                    decoration:
-                        const InputDecoration(labelText: 'Enter your number'),
-                    keyboardType:
-                        const TextInputType.numberWithOptions(decimal: true),
+                    decoration: const InputDecoration(labelText: 'Enter your number'),
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
                       //  Allow digits, decimal point
-                      FilteringTextInputFormatter.allow(
-                          RegExp(r'^\d*\.?\d{0,15}'))
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,15}'))
                     ],
                     maxLength: 16))
           ],

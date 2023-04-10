@@ -17,8 +17,7 @@ class MyNumber {
   @override
   String toString() {
     // Trim trailed zeros
-    String trimmedNumber =
-        _number.toString().replaceAll(RegExp(r'(\.0+)(?!.*\d)'), '');
+    String trimmedNumber = _number.toString().replaceAll(RegExp(r'(\.0+)(?!.*\d)'), '');
     trimmedNumber = trimmedNumber.replaceAll(RegExp(r'\.$'), '');
     return trimmedNumber;
   }
