@@ -4,6 +4,7 @@ import '../entities/my_number.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
   final String title;
 
   @override
@@ -66,18 +67,16 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(myNumber.toString()),
-          // Trims all unnecessary zeros from end
-          content: Text(_getNumberShape()),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('')
-            )
-          ]
-        );
+            title: Text(myNumber.toString()),
+            // Trims all unnecessary zeros from end
+            content: Text(_getNumberShape()),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text(''))
+            ]);
       },
     );
   }
@@ -94,8 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     controller: _txtController,
                     decoration:
                         const InputDecoration(labelText: 'Enter your number'),
-                    keyboardType: const TextInputType.numberWithOptions(
-                        decimal: true),
+                    keyboardType:
+                        const TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
                       //  Allow digits, decimal point
                       FilteringTextInputFormatter.allow(
@@ -105,9 +104,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _txtController.text.isNotEmpty ? showAlertBox : null,
-          backgroundColor: Colors.pinkAccent,
-          child: const Icon(Icons.check)
-        ));
+            onPressed: _txtController.text.isNotEmpty ? showAlertBox : null,
+            backgroundColor: Colors.pinkAccent,
+            child: const Icon(Icons.check)));
   }
 }

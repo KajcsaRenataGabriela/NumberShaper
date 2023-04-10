@@ -11,11 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Number Shaper App',
-      theme: ThemeData(
-        primarySwatch: Colors.pink,
-      ),
-      home: const MyHomePage(title: 'Number Shaper App')
-    );
+        title: 'Number Shaper App',
+        theme: ThemeData(
+          primarySwatch: Colors.pink,
+        ),
+        home: const MyHomePage(title: 'Number Shaper App'));
   }
 }
